@@ -1,0 +1,31 @@
+server:
+  port: ${SERVER_PORT:8089}
+  ssl:
+    enabled: ${SERVER_SSL_ENABLED:false}
+    certificate: ${SERVER_SSL_CERT:/etc/tls/tls.crt}
+    certificate-private-key: ${SERVER_SSL_KEY:/etc/tls/tls.key}
+
+spring:
+  application:
+    name: notification-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: notification-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:https://keycloak-platform.apps-crc.testing/realms/master}
+
+notification:
+  topics: ${NOTIFICATION_TOPICS:order.events,payment.events,shipping.events}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
