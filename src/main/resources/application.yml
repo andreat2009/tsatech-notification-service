@@ -12,6 +12,14 @@ spring:
     password: ${DB_PASSWORD}
   application:
     name: notification-service
+  mail:
+    host: ${MAIL_HOST:}
+    port: ${MAIL_PORT:25}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: ${MAIL_SMTP_AUTH:false}
+      mail.smtp.starttls.enable: ${MAIL_SMTP_STARTTLS:false}
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka.platform.svc.cluster.local:9092}
     properties:
@@ -34,6 +42,9 @@ spring:
 
 notification:
   topics: ${NOTIFICATION_TOPICS:order.events,payment.events,shipping.events}
+  mail:
+    enabled: ${NOTIFICATION_MAIL_ENABLED:false}
+    from: ${NOTIFICATION_MAIL_FROM:no-reply@tsatech.local}
 
 management:
   endpoints:
