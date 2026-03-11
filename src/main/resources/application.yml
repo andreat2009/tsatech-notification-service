@@ -47,6 +47,9 @@ notification:
     from: ${NOTIFICATION_MAIL_FROM:no-reply@tsatech.local}
 
 management:
+  health:
+    mail:
+      enabled: ${NOTIFICATION_MAIL_ENABLED:false}
   endpoints:
     web:
       exposure:
