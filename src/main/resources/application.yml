@@ -54,3 +54,8 @@ management:
     web:
       exposure:
         include: health,info
+
+cms:
+  settings:
+    runtime-url: ${CMS_SETTINGS_RUNTIME_URL:https://cms-service-ecommerce.apps-crc.testing/api/cms/settings/runtime}
+    internal-token: ${CMS_INTERNAL_TOKEN:change-me-cms-internal-token}
