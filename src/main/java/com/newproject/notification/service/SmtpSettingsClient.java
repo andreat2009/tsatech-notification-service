@@ -20,8 +20,8 @@ public class SmtpSettingsClient {
     private final String internalToken;
 
     public SmtpSettingsClient(
-        @Value("${cms.settings.runtime-url:https://cms-service-ecommerce.apps-crc.testing/api/cms/settings/runtime}") String runtimeUrl,
-        @Value("${cms.settings.internal-token:change-me-cms-internal-token}") String internalToken
+        @Value("${cms.settings.runtime-url:}") String runtimeUrl,
+        @Value("${cms.settings.internal-token:}") String internalToken
     ) {
         this.restTemplate = new RestTemplate();
         this.runtimeUrl = runtimeUrl;
@@ -29,6 +29,14 @@ public class SmtpSettingsClient {
     }
 
     public SmtpRuntimeSettings fetchRuntimeSettings() {
+        if (runtimeUrl == null || runtimeUrl.isBlank()) {
+            logger.warn("Unable to load SMTP runtime settings: cms.settings.runtime-url is not configured");
+            return null;
+        }
+        if (internalToken == null || internalToken.isBlank()) {
+            logger.warn("Unable to load SMTP runtime settings: cms.settings.internal-token is not configured");
+            return null;
+        }
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.set("X-Internal-Token", internalToken);

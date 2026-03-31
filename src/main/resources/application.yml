@@ -59,4 +59,4 @@ management:
 cms:
   settings:
     runtime-url: ${CMS_SETTINGS_RUNTIME_URL:http://cms-service.${APP_NAMESPACE:ecommerce}.svc.cluster.local:8443/api/cms/settings/runtime}
-    internal-token: ${CMS_INTERNAL_TOKEN:change-me-cms-internal-token}
+    internal-token: ${CMS_INTERNAL_TOKEN:}
